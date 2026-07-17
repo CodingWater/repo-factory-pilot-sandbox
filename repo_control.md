@@ -80,7 +80,7 @@ Every pull request must conclude with exactly one verdict:
 
 ## Pilot blueprint
 
-### Step 0: Slug Generation [`active`]
+### Step 0: Slug Generation [`done`]
 
 Create the first real product behavior: a deterministic Python function that converts a title into a URL-safe slug.
 
@@ -98,7 +98,7 @@ Create the first real product behavior: a deterministic Python function that con
 - Step 0 is staged as `done` and Step 1 as `active`.
 - The agent record and current project summary agree with the staged state.
 
-### Step 1: Title Validation [`planned`]
+### Step 1: Title Validation [`active`]
 
 Add bounded validation for title type, emptiness, and maximum length without changing slug behavior.
 
@@ -135,4 +135,4 @@ Add one small function that renders a validated title and its slug as a Markdown
 
 ## Current permitted action
 
-Step 0 is active, but implementation must not begin until a matching human-authored Step 0 work request exists. The human must create that issue before any coding agent changes product files.
+Step 1 is active, but implementation must not begin until a matching human-authored Step 1 work request exists. The human must create that issue before any coding agent changes product files.
