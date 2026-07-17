@@ -31,3 +31,7 @@ class SlugifyTitleTests(unittest.TestCase):
     def test_non_string_input(self):
         with self.assertRaises(TypeError):
             slugify_title(123)
+
+    def test_unicode_not_lowercased_to_ascii(self):
+        self.assertEqual(slugify_title("\u212a"), "")
+        self.assertEqual(slugify_title("\u0130stanbul"), "stanbul")

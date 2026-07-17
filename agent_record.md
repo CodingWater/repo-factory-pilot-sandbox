@@ -54,3 +54,14 @@ Entries are numbered sequentially starting at 000.
 **Files changed:** `app.py` (created), `tests/test_app.py` (created), `repo_control.md` (updated), `agent_record.md` (updated)
 **Checks:** `python -m py_compile app.py tests/test_app.py` passed. `python -m unittest discover -s tests` passed (9/9). `git diff --check` passed.
 **Outcome:** Step 0 implementation complete. All 9 unit tests pass. Pull request opened; awaiting human merge.
+
+---
+
+### Entry 002: 2026-07-17
+
+**Agent:** OpenCode (deepseek-v4-pro)
+**Step:** Step 0: Slug Generation (repair)
+**Work performed:** Repaired a Unicode lowercasing leak in `app.py` identified during PR review: `str.lower()` was applied before the ASCII alphanumeric filter, causing non-ASCII characters that lowercased to ASCII (e.g., U+212A KELVIN SIGN → "k", U+0130 LATIN CAPITAL LETTER I WITH DOT ABOVE → "i") to bypass the separator-collapse step. Reordered operations: strip, regex-substitute on `[^A-Za-z0-9]+`, then lowercase, then strip hyphens. Added regression test `test_unicode_not_lowercased_to_ascii` covering both cited examples.
+**Files changed:** `app.py` (updated), `tests/test_app.py` (updated), `agent_record.md` (updated)
+**Checks:** `python -m py_compile app.py tests/test_app.py` passed. `python -m unittest discover -s tests` passed (10/10). `git diff --check` passed.
+**Outcome:** Defect repaired. All 10 tests pass including regression. Awaiting human re-review and merge.

@@ -13,9 +13,11 @@ def slugify_title(title: str) -> str:
     if not isinstance(title, str):
         raise TypeError("title must be a string")
 
-    stripped = title.strip().lower()
+    stripped = title.strip()
 
-    slug = re.sub(r"[^a-z0-9]+", "-", stripped)
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", stripped)
+
+    slug = slug.lower()
 
     slug = slug.strip("-")
 
