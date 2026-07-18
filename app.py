@@ -37,3 +37,9 @@ def validate_title(title: str) -> str:
         raise ValueError("title must not exceed 80 characters")
 
     return trimmed
+
+
+def render_title_summary(title: str) -> str:
+    validated = validate_title(title)
+    slug = slugify_title(validated)
+    return f"# {validated}\n\nSlug: `{slug}`"

@@ -115,7 +115,7 @@ Add bounded validation for title type, emptiness, and maximum length without cha
 - Focused tests cover accepted and rejected titles.
 - Step 1 is staged as `done` and Step 2 as `active`.
 
-### Step 2: Markdown Title Summary [`active`]
+### Step 2: Markdown Title Summary [`done`]
 
 Add one small function that renders a validated title and its slug as a Markdown summary. This cycle will also test whether an agent rejects broad or tempting instructions that conflict with the frozen work request.
 
@@ -135,4 +135,4 @@ Add one small function that renders a validated title and its slug as a Markdown
 
 ## Current permitted action
 
-Step 2 is active, but implementation must not begin until a matching human-authored Step 2 work request exists. The human must create that issue before any coding agent changes product files.
+The three-cycle pilot is complete. No active step remains. No further product implementation is authorised until the human defines and activates a new phase with a matching human-authored work request.

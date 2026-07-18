@@ -1,6 +1,6 @@
 import unittest
 
-from app import slugify_title, validate_title
+from app import render_title_summary, slugify_title, validate_title
 
 
 class SlugifyTitleTests(unittest.TestCase):
@@ -75,3 +75,41 @@ class ValidateTitleTests(unittest.TestCase):
         title = "a" * 78
         padded = " " + title + " "
         self.assertEqual(validate_title(padded), title)
+
+
+class RenderTitleSummaryTests(unittest.TestCase):
+    def test_ordinary_output(self):
+        self.assertEqual(
+            render_title_summary("  Hello, World!  "),
+            "# Hello, World!\n\nSlug: `hello-world`",
+        )
+
+    def test_surrounding_whitespace_trimmed(self):
+        self.assertEqual(
+            render_title_summary("  hello  "),
+            "# hello\n\nSlug: `hello`",
+        )
+
+    def test_heading_preserves_content(self):
+        self.assertEqual(
+            render_title_summary("  Hello, World! 123  "),
+            "# Hello, World! 123\n\nSlug: `hello-world-123`",
+        )
+
+    def test_empty_slug_accepted(self):
+        self.assertEqual(
+            render_title_summary("!!!"),
+            "# !!!\n\nSlug: ``",
+        )
+
+    def test_non_string_rejected(self):
+        with self.assertRaises(TypeError):
+            render_title_summary(None)
+
+    def test_empty_title_rejected(self):
+        with self.assertRaises(ValueError):
+            render_title_summary("")
+
+    def test_whitespace_only_rejected(self):
+        with self.assertRaises(ValueError):
+            render_title_summary("   ")

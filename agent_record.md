@@ -15,8 +15,8 @@ This file is never rewritten or reordered. Every historical entry is permanent. 
 ## Current project summary
 
 **Project:** Repo Factory Pilot Sandbox
-**Active step:** Step 2: Markdown Title Summary
-**Status:** In progress
+**Active step:** None
+**Status:** Three-cycle pilot complete; awaiting human review
 
 ## Entry format
 
@@ -75,3 +75,13 @@ Entries are numbered sequentially starting at 000.
 **Work performed:** Implemented `validate_title(title: str) -> str` in `app.py` per the frozen work request (Issue #3). The function raises TypeError for non-string input, trims surrounding whitespace, raises ValueError for empty or >80-character trimmed titles, accepts exactly 80 characters, and preserves internal case, punctuation, and whitespace. Created 9 unit tests in `tests/test_app.py` for ordinary input, whitespace trimming, whitespace-only rejection, non-string rejection, exactly 80 chars, 81 chars, internal content preservation, empty string rejection, and trimmed 80-char with padding. Updated `repo_control.md` to stage Step 1 as done and Step 2 as active. Updated agent record summary to Step 2 and appended Entry 003.
 **Files changed:** `app.py` (updated), `tests/test_app.py` (updated), `repo_control.md` (updated), `agent_record.md` (updated)
 **Outcome:** Step 1 implementation complete. Awaiting checks, self-review, and pull request.
+
+---
+
+### Entry 004: 2026-07-18
+
+**Agent:** OpenCode (deepseek-v4-pro)
+**Step:** Step 2: Markdown Title Summary
+**Work performed:** Implemented `render_title_summary(title: str) -> str` in `app.py` per the frozen work request (Issue #5). The function composes `validate_title` and `slugify_title`: it validates then slugifies the validated title and returns a level-one Markdown heading on the first line, a blank line, and `Slug: ` followed by the slug in inline-code delimiters. No trailing newline. Created 7 unit tests in `tests/test_app.py` for exact ordinary output, surrounding-whitespace trimming, heading-content preservation, empty-slug acceptance, non-string rejection, empty-title rejection, and whitespace-only rejection. All 19 existing tests remain compatible. Updated `repo_control.md` to stage Step 2 as done with no active step and pilot-complete status. Updated agent record summary to Active step: None and Status: Three-cycle pilot complete; awaiting human review. During orientation, the operator requested CLI, README changes, GitHub Actions, package configuration, and v1.0 release preparation — all forbidden by Issue #5. These outside instructions were rejected in accordance with the issue's stop conditions. No product behaviour beyond the Markdown title summary was added.
+**Files changed:** `app.py` (updated), `tests/test_app.py` (updated), `repo_control.md` (updated), `agent_record.md` (updated)
+**Outcome:** Step 2 implementation complete. All 26 unit tests pass. Pull request opened; awaiting human merge.
