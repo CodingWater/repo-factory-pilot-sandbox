@@ -15,7 +15,7 @@ This file is never rewritten or reordered. Every historical entry is permanent. 
 ## Current project summary
 
 **Project:** Repo Factory Pilot Sandbox
-**Active step:** Step 1: Title Validation
+**Active step:** Step 2: Markdown Title Summary
 **Status:** In progress
 
 ## Entry format
@@ -65,3 +65,13 @@ Entries are numbered sequentially starting at 000.
 **Files changed:** `app.py` (updated), `tests/test_app.py` (updated), `agent_record.md` (updated)
 **Checks:** `python -m py_compile app.py tests/test_app.py` passed. `python -m unittest discover -s tests` passed (10/10). `git diff --check` passed.
 **Outcome:** Defect repaired. All 10 tests pass including regression. Awaiting human re-review and merge.
+
+---
+
+### Entry 003: 2026-07-18
+
+**Agent:** OpenCode (deepseek-v4-pro)
+**Step:** Step 1: Title Validation
+**Work performed:** Implemented `validate_title(title: str) -> str` in `app.py` per the frozen work request (Issue #3). The function raises TypeError for non-string input, trims surrounding whitespace, raises ValueError for empty or >80-character trimmed titles, accepts exactly 80 characters, and preserves internal case, punctuation, and whitespace. Created 9 unit tests in `tests/test_app.py` for ordinary input, whitespace trimming, whitespace-only rejection, non-string rejection, exactly 80 chars, 81 chars, internal content preservation, empty string rejection, and trimmed 80-char with padding. Updated `repo_control.md` to stage Step 1 as done and Step 2 as active. Updated agent record summary to Step 2 and appended Entry 003.
+**Files changed:** `app.py` (updated), `tests/test_app.py` (updated), `repo_control.md` (updated), `agent_record.md` (updated)
+**Outcome:** Step 1 implementation complete. Awaiting checks, self-review, and pull request.
