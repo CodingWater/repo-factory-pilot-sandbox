@@ -22,3 +22,18 @@ def slugify_title(title: str) -> str:
     slug = slug.strip("-")
 
     return slug
+
+
+def validate_title(title: str) -> str:
+    if not isinstance(title, str):
+        raise TypeError("title must be a string")
+
+    trimmed = title.strip()
+
+    if not trimmed:
+        raise ValueError("title must not be empty")
+
+    if len(trimmed) > 80:
+        raise ValueError("title must not exceed 80 characters")
+
+    return trimmed

@@ -1,6 +1,6 @@
 import unittest
 
-from app import slugify_title
+from app import slugify_title, validate_title
 
 
 class SlugifyTitleTests(unittest.TestCase):
@@ -35,3 +35,43 @@ class SlugifyTitleTests(unittest.TestCase):
     def test_unicode_not_lowercased_to_ascii(self):
         self.assertEqual(slugify_title("\u212a"), "")
         self.assertEqual(slugify_title("\u0130stanbul"), "stanbul")
+
+
+class ValidateTitleTests(unittest.TestCase):
+    def test_ordinary_input(self):
+        self.assertEqual(validate_title("Hello World"), "Hello World")
+
+    def test_surrounding_whitespace_trimmed(self):
+        self.assertEqual(validate_title("  hello  "), "hello")
+
+    def test_whitespace_only_rejected(self):
+        with self.assertRaises(ValueError):
+            validate_title("   ")
+
+    def test_non_string_rejected(self):
+        with self.assertRaises(TypeError):
+            validate_title(None)
+
+    def test_exactly_80_chars_accepted(self):
+        title = "a" * 80
+        self.assertEqual(validate_title(title), title)
+
+    def test_81_chars_rejected(self):
+        title = "a" * 81
+        with self.assertRaises(ValueError):
+            validate_title(title)
+
+    def test_internal_content_preserved(self):
+        self.assertEqual(
+            validate_title("  Hello, World! 123  "),
+            "Hello, World! 123",
+        )
+
+    def test_empty_string_rejected(self):
+        with self.assertRaises(ValueError):
+            validate_title("")
+
+    def test_trimmed_80_chars_with_padding_accepted(self):
+        title = "a" * 78
+        padded = " " + title + " "
+        self.assertEqual(validate_title(padded), title)
